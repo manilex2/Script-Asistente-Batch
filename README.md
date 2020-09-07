@@ -1,5 +1,5 @@
 # Script-Asistente-Batch
-Este es un Script DOS Batch que hace varias
+Este es un Script DOS Batch que hace varias funciones.
 
 ASISTENTE BATCH
 
