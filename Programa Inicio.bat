@@ -409,7 +409,8 @@ ECHO Para renombrar archivos. Presiona 7.
 ECHO Ver el log del repositorio. Presiona 8.
 ECHO Subir repositorio a GitHub. Presione 9.
 ECHO Clonar repositorio de GitHub. Presione 10.
-ECHO Volver al menu principal. Presiona 11.
+ECHO Actualizar repositorio de GitHub. Presione 11.
+ECHO Volver al menu principal. Presiona 12.
 set /p gitopcion=
 IF '%gitopcion%'=='1' GOTO nuevogit
 IF '%gitopcion%'=='2' GOTO usuariogit
@@ -421,7 +422,8 @@ IF '%gitopcion%'=='7' GOTO cambiarnombregit
 IF '%gitopcion%'=='8' GOTO gitlog
 IF '%gitopcion%'=='9' GOTO subirgithub
 IF '%gitopcion%'=='10' GOTO clonargithub
-IF '%gitopcion%'=='11' (GOTO eliminarmain) else (GOTO error14)
+IF '%gitopcion%'=='11' GOTO actualizargithub
+IF '%gitopcion%'=='12' (GOTO eliminarmain) else (GOTO error14)
 
 :error14
 TITLE Opcion invalida.
@@ -1442,6 +1444,55 @@ set carpetagit= %carpetagit%\%nombreclonar%
 cd..
 cd %carpetagit%
 git log
+PAUSE>nul
+GOTO eliminargit
+
+:actualizargithub
+cls
+ECHO ==========================================
+ECHO =========== Asistente Virtual ============
+ECHO ==========================================
+TITLE Actualizar repositorio de GitHub
+ECHO %nombre% indicame la rama la cual se va a actualizar.
+set /p githubrama=
+ECHO.
+:actualizargithuberror
+TITLE Actualizar repositorio de GitHub
+ECHO.
+ECHO La rama especificada fue esta: %githubrama%
+ECHO.
+ECHO Es correcta la informacion?
+set /p confirmaractgithub=
+IF '%confirmaractgithub%'=='si' GOTO ejecutaractgithub
+IF '%confirmaractgithub%'=='Si' GOTO ejecutaractgithub
+IF '%confirmaractgithub%'=='SI' GOTO ejecutaractgithub
+IF '%confirmaractgithub%'=='sI' GOTO ejecutaractgithub
+IF '%confirmaractgithub%'=='no' GOTO actualizargithub
+IF '%confirmaractgithub%'=='No' GOTO actualizargithub
+IF '%confirmaractgithub%'=='NO' GOTO actualizargithub
+IF '%confirmaractgithub%'=='nO' (GOTO actualizargithub) else (GOTO error19)
+
+:error25
+TITLE Opcion invalida.
+cls
+ECHO ==========================================
+ECHO =========== Asistente Virtual ============
+ECHO ==========================================
+ECHO Disculpa no entendi esa opcion %nombre%. Introduce si o no, segun sea el caso.
+ECHO.
+GOTO actualizargiterror
+
+:ejecutaractgithub
+cls
+ECHO ==========================================
+ECHO =========== Asistente Virtual ============
+ECHO ==========================================
+TITLE Actualizando repositorio de GitHub
+ECHO %nombre% me encuentro actualizando el repositorio.
+ECHO.
+ECHO Cuando haya finalizado. Presiona una tecla para continuar.
+ECHO.
+git push origin %githubrama%
 PAUSE>nul
 GOTO eliminargit
 
