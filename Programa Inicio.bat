@@ -1492,6 +1492,7 @@ ECHO %nombre% me encuentro actualizando el repositorio.
 ECHO.
 ECHO Cuando haya finalizado. Presiona una tecla para continuar.
 ECHO.
+git pull
 git push origin %githubrama%
 PAUSE>nul
 GOTO eliminargit
@@ -1559,7 +1560,8 @@ ECHO Pagos Mercantil? Presione 5.
 ECHO Banco de Venezuela? Presione 6.
 ECHO Bancaribe? Presione 7.
 ECHO BNC? Presione 8.
-ECHO Volver al menu? Presione 9.
+ECHO Mercantil Panama? Presione 9.
+ECHO Volver al menu? Presione 10.
 set /p selbanco=
 IF '%selbanco%'=='1' GOTO banesco
 IF '%selbanco%'=='2' GOTO cestaticket
@@ -1569,7 +1571,8 @@ IF '%selbanco%'=='5' GOTO pagosmercantil
 IF '%selbanco%'=='6' GOTO venezuela
 IF '%selbanco%'=='7' GOTO bancaribe
 IF '%selbanco%'=='8' GOTO bnc
-IF '%selbanco%'=='9' (GOTO eliminarmain) else (GOTO error9)
+IF '%selbanco%'=='9' GOTO panama
+IF '%selbanco%'=='10' (GOTO eliminarmain) else (GOTO error9)
 
 :banesco
 cls
@@ -1663,6 +1666,18 @@ ECHO ==========================================
 TITLE Abriendo BANCO NACIONAL DE CREDITO
 ECHO Abriendo Banco BNC, espera %nombre% un poco
 START "" "https://secure.bnc.com.ve/LoginCP.asp"
+timeout /t 6
+cls
+GOTO eliminarbanco
+
+:panama
+cls
+ECHO ==========================================
+ECHO =========== Asistente Virtual ============
+ECHO ==========================================
+TITLE Abriendo MERCANTIL PANAMA
+ECHO Abriendo Mercantil Panama %nombre%, por favor espera.
+START "" "https://melp.mercantilbanco.com.pa/DIBS_MERCANTIL_BANCO/pages/loginP.jsp"
 timeout /t 6
 cls
 GOTO eliminarbanco
